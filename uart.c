@@ -83,6 +83,18 @@ int uart_read(char *p, int len)
     return len - i;
 }
 
+int uart_read_nonblock(char *p, int len)
+{
+    int i = len;
+
+    while(!buf_isempty(rx_buffer)) {           // Spin wait
+        *p++ = buf_get_byte(rx_buffer);
+        UART0_C2 |= UART_C2_RIE_MASK;           // Turn on Rx interrupt
+        i--;
+    }
+    return len - i;
+}
+
 //
 // uart_init() -- Initialize debug / OpenSDA UART0
 //
