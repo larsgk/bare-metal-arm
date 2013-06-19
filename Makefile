@@ -18,7 +18,7 @@ LIBOBJS = _startup.o syscalls.o uart.o delay.o accel.o touch.o usb.o \
 
 INCLUDES = freedom.h common.h
 
-all: demo.srec demo.dump
+all: demo.srec demo.dump empiriKitTest.srec empiriKitTest.dump
 
 libbare.a: $(LIBOBJS)
 	$(AR) -rv libbare.a $(LIBOBJS)
